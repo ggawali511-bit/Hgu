@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>दैनंदिन फिटनेस मार्गदर्शक</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Marathi:ital@0;1&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FAF6EC;
+    --bg-warm:#F3ECDA;
+    --card:#FFFFFF;
+    --ink:#243029;
+    --ink-soft:#5B685E;
+    --teal:#2F6F5E;
+    --teal-dark:#1F4B40;
+    --marigold:#E3A62F;
+    --marigold-dark:#B97E12;
+    --line:#E4DEC9;
+    --rose:#C1613F;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Noto Sans Devanagari', sans-serif;
+    line-height:1.5;
+    padding:18px 14px 60px;
+  }
+  h1,h2,h3,.serif{
+    font-family:'Tiro Devanagari Marathi', serif;
+    font-weight:400;
+  }
+  .wrap{max-width:960px;margin:0 auto;}
+
+  /* ---------- Header ---------- */
+  header{
+    text-align:center;
+    margin-bottom:22px;
+  }
+  header .eyebrow{
+    color:var(--teal);
+    font-size:0.95rem;
+    letter-spacing:0.02em;
+  }
+  header h1{
+    font-size:2rem;
+    margin:6px 0 6px;
+    color:var(--teal-dark);
+  }
+  header p{
+    color:var(--ink-soft);
+    font-size:0.95rem;
+    max-width:520px;
+    margin:0 auto;
+  }
+
+  /* ---------- Category selector ---------- */
+  .cat-row{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:10px;
+    margin:22px 0 26px;
+  }
+  .cat-btn{
+    border:2px solid var(--line);
+    background:var(--card);
+    border-radius:999px;
+    padding:10px 18px;
+    font-family:'Noto Sans Devanagari', sans-serif;
+    font-size:1rem;
+    font-weight:600;
+    color:var(--ink);
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    transition:transform .15s ease, background .15s ease, border-color .15s ease, color .15s ease;
+  }
+  .cat-btn .em{font-size:1.25rem;}
+  .cat-btn:hover{transform:translateY(-2px); border-color:var(--teal);}
+  .cat-btn.active{
+    background:var(--teal);
+    border-color:var(--teal);
+    color:#fff;
+  }
+
+  /* ---------- Panel ---------- */
+  .panel-title{
+    text-align:center;
+    margin-bottom:6px;
+  }
+  .panel-title h2{
+    font-size:1.5rem;
+    color:var(--teal-dark);
+    margin:0;
+  }
+  .panel-title p{
+    color:var(--ink-soft);
+    margin:4px 0 0;
+    font-size:0.92rem;
+  }
+
+  section.block{margin-top:34px;}
+  .block > h3.section-head{
+    font-size:1.15rem;
+    color:var(--rose);
+    border-bottom:2px solid var(--line);
+    padding-bottom:8px;
+    margin:0 0 16px;
+  }
+
+  /* exercise + stretch cards */
+  .move-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:16px;
+  }
+  @media(min-width:700px){
+    .move-grid{grid-template-columns:1fr 1fr;}
+  }
+  .move-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:18px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .move-card .tag{
+    font-size:0.78rem;
+    color:var(--teal);
+    font-weight:700;
+  }
+  .move-card h4{
+    margin:0;
+    font-family:'Tiro Devanagari Marathi', serif;
+    font-size:1.25rem;
+    color:var(--ink);
+  }
+  .move-card .art{
+    align-self:center;
+    width:150px;
+    height:150px;
+  }
+  .move-card .art svg{width:100%;height:100%;}
+  .move-card ol{
+    margin:4px 0 0;
+    padding-left:20px;
+    color:var(--ink-soft);
+    font-size:0.94rem;
+  }
+  .move-card ol li{margin-bottom:4px;}
+
+  /* meal timeline */
+  .meal-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:14px;
+  }
+  @media(min-width:700px){
+    .meal-grid{grid-template-columns:repeat(4,1fr);}
+  }
+  .meal-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-top:5px solid var(--marigold);
+    border-radius:14px;
+    padding:16px;
+  }
+  .meal-card.snack{border-top-color:var(--rose);}
+  .meal-card h4{
+    margin:0 0 4px;
+    font-size:1.02rem;
+    color:var(--teal-dark);
+  }
+  .meal-card .time{
+    font-size:0.78rem;
+    color:var(--ink-soft);
+    margin-bottom:10px;
+  }
+  .meal-card ul{
+    margin:0;
+    padding-left:18px;
+    font-size:0.92rem;
+    color:var(--ink);
+  }
+  .meal-card ul li{margin-bottom:5px;}
+
+  /* protein chart */
+  .protein-list{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:20px;
+  }
+  .protein-row{
+    display:grid;
+    grid-template-columns:120px 1fr 60px;
+    align-items:center;
+    gap:12px;
+    margin-bottom:12px;
+  }
+  .protein-row .food-name{font-size:0.94rem; font-weight:600;}
+  .protein-row .bar-bg{
+    background:var(--bg-warm);
+    border-radius:8px;
+    height:16px;
+    overflow:hidden;
+  }
+  .protein-row .bar-fill{
+    height:100%;
+    background:linear-gradient(90deg, var(--marigold), var(--teal));
+    border-radius:8px 0 0 8px;
+  }
+  .protein-row .amount{
+    font-size:0.86rem;
+    color:var(--ink-soft);
+    text-align:right;
+  }
+  .protein-note{
+    margin-top:14px;
+    font-size:0.86rem;
+    color:var(--ink-soft);
+    border-top:1px dashed var(--line);
+    padding-top:12px;
+  }
+
+  footer{
+    text-align:center;
+    margin-top:40px;
+    color:var(--ink-soft);
+    font-size:0.82rem;
+  }
+
+  /* ---------- Greeting ---------- */
+  .greeting{
+    text-align:center;
+    font-family:'Tiro Devanagari Marathi', serif;
+    font-size:1.55rem;
+    color:var(--marigold-dark);
+    margin:0 0 2px;
+    opacity:0;
+    animation:fadeInGreeting .8s ease forwards;
+  }
+  @keyframes fadeInGreeting{
+    from{opacity:0; transform:translateY(-8px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+
+  /* ---------- Age row ---------- */
+  .age-row{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:10px;
+    margin:0 0 22px;
+  }
+  .age-item{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:6px 10px;
+    font-size:0.84rem;
+    color:var(--ink-soft);
+  }
+  .age-item .em{font-size:1.05rem;}
+  .age-item input{
+    width:50px;
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:4px 6px;
+    font-family:'Noto Sans Devanagari', sans-serif;
+    font-size:0.9rem;
+    text-align:center;
+    color:var(--ink);
+  }
+  .age-item input:focus{outline:2px solid var(--teal); outline-offset:1px;}
+
+  /* ---------- Vardhan teacher ---------- */
+  .teacher-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:18px;
+  }
+  .teacher-head{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:14px;
+  }
+  .teacher-avatar{
+    width:52px;height:52px;border-radius:50%;
+    background:linear-gradient(135deg, var(--marigold), var(--teal));
+    display:flex;align-items:center;justify-content:center;
+    font-size:1.6rem;
+    flex-shrink:0;
+  }
+  .teacher-head h4{margin:0;font-family:'Tiro Devanagari Marathi', serif;font-size:1.2rem;color:var(--teal-dark);}
+  .teacher-head p{margin:2px 0 0;font-size:0.85rem;color:var(--ink-soft);}
+
+  .chip-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;}
+  .chip{
+    border:1px solid var(--line);
+    background:var(--bg-warm);
+    border-radius:999px;
+    padding:6px 12px;
+    font-size:0.82rem;
+    cursor:pointer;
+    color:var(--ink);
+  }
+  .chip:hover{border-color:var(--teal);}
+
+  .chat-log{
+    max-height:320px;
+    overflow-y:auto;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    padding:4px 2px;
+    margin-bottom:12px;
+  }
+  .msg{
+    max-width:85%;
+    padding:10px 14px;
+    border-radius:14px;
+    font-size:0.92rem;
+    line-height:1.5;
+    white-space:pre-wrap;
+  }
+  .msg.user{
+    align-self:flex-end;
+    background:var(--teal);
+    color:#fff;
+    border-bottom-right-radius:4px;
+  }
+  .msg.bot{
+    align-self:flex-start;
+    background:var(--bg-warm);
+    color:var(--ink);
+    border-bottom-left-radius:4px;
+  }
+  .msg.bot.loading{color:var(--ink-soft); font-style:italic;}
+
+  .chat-input-row{display:flex; gap:8px;}
+  .chat-input-row input{
+    flex:1;
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:10px 14px;
+    font-family:'Noto Sans Devanagari', sans-serif;
+    font-size:0.94rem;
+  }
+  .chat-input-row input:focus{outline:2px solid var(--teal); outline-offset:1px;}
+  .chat-input-row button{
+    border:none;
+    background:var(--rose);
+    color:#fff;
+    font-weight:700;
+    border-radius:12px;
+    padding:10px 18px;
+    cursor:pointer;
+    font-family:'Noto Sans Devanagari', sans-serif;
+  }
+  .chat-input-row button:disabled{opacity:0.6;cursor:not-allowed;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <p class="greeting" id="greeting">शुभ सकाळ 🌞</p>
+    <div class="eyebrow">रोज सकाळी सुरू करा</div>
+    <h1>दैनंदिन फिटनेस मार्गदर्शक</h1>
+    <p>तुमचा गट निवडा — व्यायाम, स्ट्रेचिंग, जेवणाचे वेळापत्रक आणि प्रोटीनयुक्त पदार्थ लगेच दिसतील.</p>
+  </header>
+
+  <div class="cat-row" id="catRow"></div>
+  <div class="age-row" id="ageRow"></div>
+
+  <div class="panel-title">
+    <h2 id="panelTitle"></h2>
+    <p id="panelSub"></p>
+  </div>
+
+  <section class="block">
+    <h3 class="section-head">सकाळचा व्यायाम आणि स्ट्रेचिंग</h3>
+    <div class="move-grid" id="moveGrid"></div>
+  </section>
+
+  <section class="block">
+    <h3 class="section-head">जेवणाचे वेळापत्रक</h3>
+    <div class="meal-grid" id="mealGrid"></div>
+  </section>
+
+  <section class="block">
+    <h3 class="section-head">प्रोटीनसाठी काय खावे</h3>
+    <div class="protein-list" id="proteinList"></div>
+  </section>
+
+  <section class="block">
+    <h3 class="section-head">AI फिटनेस डान्स व आहार टीचर</h3>
+    <div class="teacher-card">
+      <div class="teacher-head">
+        <div class="teacher-avatar">🧑‍🏫</div>
+        <div>
+          <h4>वर्धन</h4>
+          <p>तुमचा AI फिटनेस डान्स व आहार टीचर — काय खावे, काय प्यावे, कोणता व्यायाम/डान्स करावा विचारा.</p>
+        </div>
+      </div>
+      <div class="chip-row" id="chipRow">
+        <button class="chip" type="button">आजचा फिटनेस डान्स कोणता करू?</button>
+        <button class="chip" type="button">व्यायामानंतर काय प्यावे?</button>
+        <button class="chip" type="button">प्रोटीनसाठी स्वस्त पर्याय सांगा</button>
+      </div>
+      <div class="chat-log" id="chatLog"></div>
+      <div class="chat-input-row">
+        <input type="text" id="chatInput" placeholder="वर्धनला काहीही विचारा...">
+        <button id="chatSend" type="button">पाठवा</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>ही माहिती सर्वसाधारण मार्गदर्शनासाठी आहे. काही आरोग्य समस्या असल्यास डॉक्टरांचा सल्ला घ्या.</footer>
+</div>
+
+<script>
+/* ---------------- Pictogram library ---------------- */
+const STROKE = `stroke="var(--ink)" stroke-width="7" stroke-linecap="round" fill="none"`;
+const HEAD = (cx,cy)=>`<circle cx="${cx}" cy="${cy}" r="14" fill="var(--marigold)" stroke="var(--ink)" stroke-width="3"/>`;
+
+const poses = {
+  jumpingjack: `
+    ${HEAD(80,26)}
+    <line x1="80" y1="40" x2="80" y2="96" ${STROKE}/>
+    <line x1="80" y1="52" x2="46" y2="18" ${STROKE}/>
+    <line x1="80" y1="52" x2="114" y2="18" ${STROKE}/>
+    <line x1="80" y1="96" x2="46" y2="146" ${STROKE}/>
+    <line x1="80" y1="96" x2="114" y2="146" ${STROKE}/>
+  `,
+  skipping: `
+    ${HEAD(80,26)}
+    <line x1="80" y1="40" x2="80" y2="96" ${STROKE}/>
+    <line x1="80" y1="55" x2="54" y2="74" ${STROKE}/>
+    <line x1="80" y1="55" x2="106" y2="74" ${STROKE}/>
+    <path d="M54,74 Q80,150 106,74" stroke="var(--rose)" stroke-width="4" fill="none" stroke-dasharray="6 6"/>
+    <line x1="80" y1="96" x2="70" y2="146" ${STROKE}/>
+    <line x1="80" y1="96" x2="100" y2="112" ${STROKE}/>
+    <line x1="100" y1="112" x2="112" y2="96" ${STROKE}/>
+  `,
+  suryanamaskar: `
+    <line x1="80" y1="88" x2="63" y2="148" ${STROKE}/>
+    <line x1="80" y1="88" x2="97" y2="148" ${STROKE}/>
+    <line x1="80" y1="88" x2="102" y2="116" ${STROKE}/>
+    ${HEAD(110,126)}
+    <line x1="102" y1="116" x2="90" y2="150" ${STROKE}/>
+    <line x1="102" y1="116" x2="114" y2="150" ${STROKE}/>
+  `,
+  pushup: `
+    ${HEAD(28,96)}
+    <line x1="42" y1="94" x2="122" y2="94" ${STROKE}/>
+    <line x1="60" y1="94" x2="60" y2="132" ${STROKE}/>
+    <line x1="105" y1="94" x2="105" y2="132" ${STROKE}/>
+    <line x1="122" y1="94" x2="142" y2="112" ${STROKE}/>
+  `,
+  walking: `
+    ${HEAD(58,26)}
+    <line x1="58" y1="40" x2="58" y2="92" ${STROKE}/>
+    <line x1="58" y1="52" x2="82" y2="70" ${STROKE}/>
+    <line x1="58" y1="52" x2="36" y2="76" ${STROKE}/>
+    <line x1="58" y1="92" x2="86" y2="140" ${STROKE}/>
+    <line x1="58" y1="92" x2="36" y2="146" ${STROKE}/>
+  `,
+  chairsit: `
+    <line x1="34" y1="112" x2="122" y2="112" ${STROKE}/>
+    <line x1="40" y1="112" x2="40" y2="150" stroke="var(--ink-soft)" stroke-width="6" stroke-linecap="round"/>
+    <line x1="116" y1="112" x2="116" y2="150" stroke="var(--ink-soft)" stroke-width="6" stroke-linecap="round"/>
+    ${HEAD(82,50)}
+    <line x1="82" y1="64" x2="82" y2="108" ${STROKE}/>
+    <line x1="82" y1="72" x2="56" y2="38" ${STROKE}/>
+    <line x1="82" y1="72" x2="108" y2="38" ${STROKE}/>
+    <line x1="82" y1="108" x2="82" y2="130" ${STROKE}/>
+    <line x1="82" y1="130" x2="62" y2="140" ${STROKE}/>
+  `,
+  toetouch: `
+    <line x1="80" y1="90" x2="66" y2="146" ${STROKE}/>
+    <line x1="80" y1="90" x2="94" y2="146" ${STROKE}/>
+    <line x1="80" y1="90" x2="80" y2="112" ${STROKE}/>
+    ${HEAD(80,124)}
+    <line x1="80" y1="100" x2="72" y2="150" ${STROKE}/>
+    <line x1="80" y1="100" x2="88" y2="150" ${STROKE}/>
+  `,
+  overhead: `
+    ${HEAD(80,26)}
+    <line x1="80" y1="40" x2="80" y2="96" ${STROKE}/>
+    <line x1="80" y1="46" x2="52" y2="10" ${STROKE}/>
+    <line x1="80" y1="46" x2="108" y2="10" ${STROKE}/>
+    <line x1="80" y1="96" x2="68" y2="146" ${STROKE}/>
+    <line x1="80" y1="96" x2="92" y2="146" ${STROKE}/>
+  `,
+  shouldercross: `
+    ${HEAD(80,26)}
+    <line x1="80" y1="40" x2="80" y2="96" ${STROKE}/>
+    <line x1="108" y1="52" x2="48" y2="64" ${STROKE}/>
+    <line x1="80" y1="54" x2="60" y2="48" ${STROKE}/>
+    <line x1="80" y1="96" x2="66" y2="146" ${STROKE}/>
+    <line x1="80" y1="96" x2="94" y2="146" ${STROKE}/>
+  `,
+  sidebend: `
+    <path d="M80,96 Q92,64 108,34" ${STROKE}/>
+    ${HEAD(108,24)}
+    <line x1="86" y1="60" x2="56" y2="30" ${STROKE}/>
+    <line x1="86" y1="66" x2="102" y2="90" ${STROKE}/>
+    <line x1="80" y1="96" x2="66" y2="146" ${STROKE}/>
+    <line x1="80" y1="96" x2="94" y2="146" ${STROKE}/>
+  `,
+  armsout: `
+    ${HEAD(80,26)}
+    <line x1="80" y1="40" x2="80" y2="96" ${STROKE}/>
+    <line x1="80" y1="52" x2="34" y2="52" ${STROKE}/>
+    <line x1="80" y1="52" x2="126" y2="52" ${STROKE}/>
+    <line x1="80" y1="96" x2="66" y2="146" ${STROKE}/>
+    <line x1="80" y1="96" x2="94" y2="146" ${STROKE}/>
+  `,
+  seatedstretch: `
+    <path d="M46,142 Q80,116 114,142" ${STROKE}/>
+    <line x1="80" y1="120" x2="80" y2="72" ${STROKE}/>
+    ${HEAD(80,58)}
+    <line x1="80" y1="76" x2="58" y2="40" ${STROKE}/>
+    <line x1="80" y1="76" x2="102" y2="40" ${STROKE}/>
+  `,
+};
+
+function art(poseId){
+  return `<svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">${poses[poseId]}</svg>`;
+}
+
+/* ---------------- Category data ---------------- */
+const categories = {
+  boy: {
+    label:"मुलगा", emoji:"🧒", sub:"वय अंदाजे ६ ते १४ वर्षे",
+    exercise:{name:"जागच्या जागी उड्या (Jumping Jacks)", pose:"jumpingjack",
+      steps:["सरळ उभे राहा, हात शरीराजवळ ठेवा.","उडी मारताना हात डोक्यावर घ्या आणि पाय बाजूला उघडा.","परत उडी मारून सुरुवातीच्या स्थितीत या.","हे १५ ते २० वेळा सलग करा."]},
+    stretch:{name:"पुढे वाकून पायाचे स्ट्रेचिंग", pose:"toetouch",
+      steps:["पाय जुळवून सरळ उभे राहा.","हळूच पुढे वाकून हातांनी पायाच्या बोटांना स्पर्श करण्याचा प्रयत्न करा.","गुडघे सरळ ठेवा, धक्का देऊ नका.","१० ते १५ सेकंद थांबा, ३ वेळा पुन्हा करा."]},
+    meals:{
+      morning:["एक ग्लास दूध","पोहे किंवा उपमा","एक केळे"],
+      afternoon:["वरण-भात","भाजी-पोळी","एक वाटी दही"],
+      snack:["मूठभर भाजलेले शेंगदाणे किंवा बदाम","एक फळ (सफरचंद/पेरू)"],
+      evening:["खिचडी किंवा भाजी-पोळी","झोपण्यापूर्वी एक ग्लास दूध"]
+    },
+    protein:[["अंडे",6],["दूध (१ ग्लास)",8],["पनीर (१०० ग्रॅम)",18],["मूगडाळ (१ वाटी)",9],["शेंगदाणे (मूठभर)",13]]
+  },
+  girl: {
+    label:"मुलगी", emoji:"👧", sub:"वय अंदाजे ६ ते १४ वर्षे",
+    exercise:{name:"दोरीवरच्या उड्या (Skipping)", pose:"skipping",
+      steps:["दोरीचे दोन्ही टोक हातात घट्ट धरा.","दोरी पायाखालून फिरवत हलकी उडी मारा.","खांदे आणि मनगट सैल ठेवा.","सुरुवातीला १-२ मिनिटे सराव करा."]},
+    stretch:{name:"हात वर करून पूर्ण शरीर ताणणे", pose:"overhead",
+      steps:["सरळ उभे राहून दोन्ही हात डोक्यावर सरळ न्या.","बोटे एकमेकांत गुंफून वर ताणा.","संपूर्ण शरीर टाचांपर्यंत ताणल्यासारखे वाटू द्या.","१० सेकंद थांबून सोडा, ३ वेळा करा."]},
+    meals:{
+      morning:["एक ग्लास दूध","इडली/डोसा किंवा उपमा","भिजवलेले ४ बदाम"],
+      afternoon:["वरण-भात","पालेभाजी-पोळी","कोशिंबीर"],
+      snack:["फळांचा तुकडा","मूठभर सुकामेवा"],
+      evening:["भाजी-पोळी किंवा खिचडी","झोपण्यापूर्वी हळद-दूध"]
+    },
+    protein:[["दूध (१ ग्लास)",8],["अंडे",6],["पनीर (१०० ग्रॅम)",18],["दही (१ वाटी)",11],["मूगडाळ (१ वाटी)",9]]
+  },
+  man: {
+    label:"पुरुष", emoji:"👨", sub:"प्रौढ वयोगट",
+    exercise:{name:"पुश-अप्स (Push-ups)", pose:"pushup",
+      steps:["जमिनीवर पालथे झोपून हात खांद्याच्या रुंदीत ठेवा.","शरीर सरळ रेषेत ठेवत हातांवर वजन तोलून वर उचला.","कोपर वाकवून हळू खाली या, छाती जमिनीला जवळ न्या.","सुरुवातीला १० ते १५ पुश-अप्सचे २ सेट करा."]},
+    stretch:{name:"खांदे व छातीचे स्ट्रेचिंग", pose:"shouldercross",
+      steps:["एक हात छातीसमोर आडवा धरा.","दुसऱ्या हाताने तो हात हलकेच जवळ ओढा.","खांद्यात ताण जाणवेल इतपत धरून ठेवा.","१५ सेकंद थांबून हात बदला."]},
+    meals:{
+      morning:["स्प्राउट्स किंवा अंडी भुर्जी","ओट्स किंवा पोळी-भाजी","एक ग्लास दूध किंवा ताक"],
+      afternoon:["पूर्ण थाळी: भात-पोळी, डाळ, भाजी, कोशिंबीर","एक वाटी दही"],
+      snack:["उकडलेले चणे किंवा मूठभर बदाम","ग्रीन टी किंवा ताक"],
+      evening:["ग्रील्ड चिकन/पनीर व भाज्या किंवा हलके वरण-भात","सूप"]
+    },
+    protein:[["चिकन (१०० ग्रॅम)",27],["अंडे (२)",12],["पनीर (१०० ग्रॅम)",18],["सोयाबीन (१०० ग्रॅम)",36],["चणे (१ वाटी)",19],["बदाम (मूठभर)",13]]
+  },
+  woman: {
+    label:"महिला", emoji:"👩", sub:"प्रौढ वयोगट",
+    exercise:{name:"सूर्यनमस्कार", pose:"suryanamaskar",
+      steps:["सरळ उभे राहून हात नमस्काराच्या स्थितीत छातीजवळ आणा.","श्वास सोडत पुढे वाकून हातांनी जमिनीला स्पर्श करा.","पाठ शक्य तितकी सरळ ठेवा, गुडघे हलके वाकवू शकता.","हळूहळू परत सरळ उभे राहा. हे ५ ते १० वेळा करा."]},
+    stretch:{name:"कंबरेचे बाजूने स्ट्रेचिंग", pose:"sidebend",
+      steps:["पाय किंचित बाजूला ठेवून सरळ उभे राहा.","एक हात वर करून हळूच त्याच बाजूला कंबरेतून वाका.","दुसरा हात कंबरेवर किंवा मांडीवर ठेवा.","१० सेकंद थांबून दुसऱ्या बाजूने करा."]},
+    meals:{
+      morning:["स्प्राउट्स किंवा उपमा","एक ग्लास दूध","भिजवलेले बदाम-अक्रोड"],
+      afternoon:["भाजी-पोळी, डाळ-भात","कोशिंबीर व एक वाटी दही"],
+      snack:["फळ किंवा मूठभर सुकामेवा","नारळ पाणी किंवा ताक"],
+      evening:["सूप व सलाड किंवा हलकी खिचडी","झोपण्यापूर्वी हळद-दूध"]
+    },
+    protein:[["पनीर (१०० ग्रॅम)",18],["दही (१ वाटी)",11],["मूगडाळ (१ वाटी)",9],["मोड आलेली कडधान्ये (१ वाटी)",7],["अंडे",6],["बदाम (मूठभर)",13]]
+  },
+  grandpa: {
+    label:"आजोबा", emoji:"👴", sub:"ज्येष्ठ नागरिक — हलका व्यायाम",
+    exercise:{name:"सकाळी शतपावली (हलके चालणे)", pose:"walking",
+      steps:["सपाट व मोकळ्या जागी हळू चालायला सुरुवात करा.","श्वास सहज ठेवत १५ ते २० मिनिटे चाला.","दम लागल्यास थांबून विश्रांती घ्या.","चालताना पाण्याची बाटली सोबत ठेवा."]},
+    stretch:{name:"सांध्यांची हलकी हालचाल", pose:"armsout",
+      steps:["खुर्चीच्या आधाराने किंवा उभे राहून हात हळूच खांद्याच्या उंचीपर्यंत बाजूला न्या.","मनगटे व घोटे हळूच गोल फिरवा.","कोणतीही हालचाल झटक्यात करू नका.","प्रत्येक हालचाल ५-६ वेळा हळूवार करा."]},
+    meals:{
+      morning:["कोमट दूध व भिजवलेले बदाम","मऊ पोहे/उपमा किंवा दलिया"],
+      afternoon:["वरण-भात (मऊ शिजवलेले)","सुपाच्य भाजी-पोळी"],
+      snack:["ताक किंवा नारळ पाणी","एखादे मऊ फळ (पपई/केळे)"],
+      evening:["हलकी खिचडी किंवा सूप","झोपण्यापूर्वी कोमट दूध"]
+    },
+    protein:[["दूध (१ ग्लास)",8],["मूगडाळ पाणी/डाळ (१ वाटी)",7],["मऊ पनीर (५० ग्रॅम)",9],["दही (१ वाटी)",11],["भिजवलेले बदाम (४-५)",5]]
+  },
+  grandma: {
+    label:"आजी", emoji:"👵", sub:"ज्येष्ठ नागरिक — हलका व्यायाम",
+    exercise:{name:"खुर्चीवर बसून हलका व्यायाम", pose:"chairsit",
+      steps:["खुर्चीत ताठ बसा, पाय जमिनीवर सपाट ठेवा.","दोन्ही हात हळूच खांद्यापर्यंत वर उचला व खाली आणा.","हे १० वेळा हळूवार गतीने करा.","त्यानंतर पायाचे घोटे वर-खाली हलवा."]},
+    stretch:{name:"बसून हलके स्ट्रेचिंग", pose:"seatedstretch",
+      steps:["आरामात मांडी घालून किंवा खुर्चीत बसा.","दोन्ही हात हळूच डोक्यावर सरळ न्या.","मान डावीकडे-उजवीकडे हळूच वळवा.","श्वास सहज ठेवत १० सेकंद प्रत्येक स्थितीत थांबा."]},
+    meals:{
+      morning:["कोमट दूध व भिजवलेले बदाम","मऊ इडली/उपमा"],
+      afternoon:["वरण-भात (मऊ)","सुपाच्य भाजी-पोळी व ताक"],
+      snack:["नारळ पाणी किंवा ताक","मऊ फळ (पपई/चिकू)"],
+      evening:["सूप किंवा मऊ खिचडी","झोपण्यापूर्वी कोमट दूध"]
+    },
+    protein:[["दूध (१ ग्लास)",8],["दही/ताक (१ वाटी)",11],["मूगडाळ (१ वाटी)",7],["मऊ पनीर (५० ग्रॅम)",9],["भिजवलेले बदाम (४-५)",5]]
+  },
+};
+
+/* ---------------- Render ---------------- */
+const catRow = document.getElementById('catRow');
+const ageRow = document.getElementById('ageRow');
+const panelTitle = document.getElementById('panelTitle');
+const panelSub = document.getElementById('panelSub');
+const moveGrid = document.getElementById('moveGrid');
+const mealGrid = document.getElementById('mealGrid');
+const proteinList = document.getElementById('proteinList');
+
+let currentKey = 'boy';
+const ages = {}; // वयोगटानुसार नोंदवलेले वय
+
+Object.keys(categories).forEach(key=>{
+  const btn = document.createElement('button');
+  btn.className = 'cat-btn';
+  btn.dataset.key = key;
+  btn.innerHTML = `<span class="em">${categories[key].emoji}</span><span>${categories[key].label}</span>`;
+  btn.addEventListener('click', ()=>selectCategory(key));
+  catRow.appendChild(btn);
+
+  const item = document.createElement('label');
+  item.className = 'age-item';
+  item.innerHTML = `<span class="em">${categories[key].emoji}</span><span>${categories[key].label} वय:</span>`;
+  const input = document.createElement('input');
+  input.type = 'number';
+  input.min = '0';
+  input.max = '110';
+  input.placeholder = 'वय';
+  input.addEventListener('input', ()=>{
+    ages[key] = input.value;
+    if(currentKey===key) updatePanelSub(key);
+  });
+  item.appendChild(input);
+  ageRow.appendChild(item);
+});
+
+function updatePanelSub(key){
+  const c = categories[key];
+  panelSub.textContent = ages[key] ? `${c.sub} • नोंदवलेले वय: ${ages[key]} वर्षे` : c.sub;
+}
+
+function moveCard(tag, data){
+  return `
+    <div class="move-card">
+      <span class="tag">${tag}</span>
+      <h4>${data.name}</h4>
+      <div class="art">${art(data.pose)}</div>
+      <ol>${data.steps.map(s=>`<li>${s}</li>`).join('')}</ol>
+    </div>
+  `;
+}
+
+function mealCard(title, time, items, isSnack){
+  return `
+    <div class="meal-card ${isSnack?'snack':''}">
+      <h4>${title}</h4>
+      <div class="time">${time}</div>
+      <ul>${items.map(i=>`<li>${i}</li>`).join('')}</ul>
+    </div>
+  `;
+}
+
+function selectCategory(key){
+  const c = categories[key];
+  currentKey = key;
+  document.querySelectorAll('.cat-btn').forEach(b=>b.classList.toggle('active', b.dataset.key===key));
+
+  panelTitle.textContent = `${c.label} — दैनंदिन दिनक्रम`;
+  updatePanelSub(key);
+
+  moveGrid.innerHTML = moveCard('सकाळचा व्यायाम', c.exercise) + moveCard('स्ट्रेचिंग', c.stretch);
+
+  mealGrid.innerHTML =
+    mealCard('सकाळचा नाश्ता','सकाळी ७ ते ९', c.meals.morning,false) +
+    mealCard('दुपारचे जेवण','दुपारी १२ ते १.३०', c.meals.afternoon,false) +
+    mealCard('मध्यंतरीचा नाश्ता','दुपारी ४ ते ५', c.meals.snack,true) +
+    mealCard('संध्याकाळचे जेवण','संध्याकाळी ७ ते ८.३०', c.meals.evening,false);
+
+  const maxVal = Math.max(...c.protein.map(p=>p[1]));
+  proteinList.innerHTML = c.protein.map(([name,grams])=>`
+    <div class="protein-row">
+      <div class="food-name">${name}</div>
+      <div class="bar-bg"><div class="bar-fill" style="width:${(grams/maxVal*100).toFixed(0)}%"></div></div>
+      <div class="amount">${grams} ग्रॅम</div>
+    </div>
+  `).join('') + `<div class="protein-note">वरील प्रोटीनचे प्रमाण अंदाजे असून, ते सर्वसाधारण मार्गदर्शनासाठी दिले आहे.</div>`;
+
+  window.scrollTo({top: document.querySelector('.panel-title').offsetTop - 10, behavior:'smooth'});
+}
+
+selectCategory('boy');
+
+/* ---------------- वर्धन: AI फिटनेस डान्स व आहार टीचर ---------------- */
+const chatLog = document.getElementById('chatLog');
+const chatInput = document.getElementById('chatInput');
+const chatSend = document.getElementById('chatSend');
+const chipRow = document.getElementById('chipRow');
+
+const VARDHAN_SYSTEM = `तुम्ही "वर्धन" आहात — एक मैत्रीपूर्ण AI फिटनेस डान्स व आहार टीचर, जो मराठी भाषेत बोलतो.
+वापरकर्ता कोणत्याही वयोगटातील (मुलगा, मुलगी, पुरुष, महिला, आजोबा, आजी) असू शकतो.
+तुमचे काम: काय खावे, काय प्यावे, कोणता व्यायाम किंवा फिटनेस डान्स करावा, हे सोप्या, प्रोत्साहन देणाऱ्या भाषेत सांगणे.
+उत्तर लहान, स्पष्ट आणि मुद्देसूद ठेवा (जास्तीत जास्त ६-८ ओळी). गरज असल्यास बुलेट पॉइंट्स वापरा.
+वैद्यकीय सल्ला देऊ नका; गंभीर आरोग्य समस्या असल्यास डॉक्टरांना भेटण्यास सुचवा.`;
+
+function addMessage(text, who){
+  const div = document.createElement('div');
+  div.className = `msg ${who}`;
+  div.textContent = text;
+  chatLog.appendChild(div);
+  chatLog.scrollTop = chatLog.scrollHeight;
+  return div;
+}
+
+async function askVardhan(question){
+  if(!question.trim()) return;
+  addMessage(question, 'user');
+  chatInput.value = '';
+  chatSend.disabled = true;
+  const loadingEl = addMessage('वर्धन विचार करत आहे...', 'bot loading');
+
+  try{
+    const response = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "claude-sonnet-4-6",
+        max_tokens: 1000,
+        system: VARDHAN_SYSTEM,
+        messages: [{ role: "user", content: question }]
+      })
+    });
+    const data = await response.json();
+    const textBlock = (data.content || []).find(b=>b.type==='text');
+    loadingEl.remove();
+    addMessage(textBlock ? textBlock.text : 'माफ करा, सध्या उत्तर देता आले नाही. पुन्हा प्रयत्न करा.', 'bot');
+  }catch(err){
+    loadingEl.remove();
+    addMessage('माफ करा, सध्या वर्धनशी संपर्क होत नाहीये. थोड्या वेळाने पुन्हा प्रयत्न करा.', 'bot');
+  }finally{
+    chatSend.disabled = false;
+  }
+}
+
+chatSend.addEventListener('click', ()=>askVardhan(chatInput.value));
+chatInput.addEventListener('keydown', (e)=>{ if(e.key==='Enter') askVardhan(chatInput.value); });
+chipRow.querySelectorAll('.chip').forEach(chip=>{
+  chip.addEventListener('click', ()=>askVardhan(chip.textContent));
+});
+
+addMessage('नमस्कार! मी वर्धन 🙏 — तुमचा फिटनेस डान्स व आहार टीचर. काय खावे, काय प्यावे किंवा कोणता व्यायाम/डान्स करावा, हे मला विचारा.', 'bot');
+</script>
+</body>
+</html>
